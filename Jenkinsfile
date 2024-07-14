@@ -12,7 +12,7 @@ pipeline {
                 
                 echo 'build docker image...'
                 docker login -u $username -p $password
-                docker build -t harbinman/nodetest .
+                docker build -t  .
                 docker tag   harbinman/nodetest
                 docker push harbinman/nodetest:${BUILD_ID}
  
