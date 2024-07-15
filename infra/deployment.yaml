@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodetest
+  namespace: nodetest
+  labels:
+    app: nodetest
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodetest
+  template:
+    metadata:
+      labels:
+        app: nodetest
+    spec:
+      containers:
+      - name: nodetest
+        image: harbinman/nodetest:7
+        ports:
+        - containerPort: 3000
