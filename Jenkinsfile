@@ -29,7 +29,7 @@ pipeline {
                        // 使用凭据进行 Docker 登录
                     withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                         sh '''
-                            echo $PASSWORD | docker login -u $USERNAME --password-stdin ${DOCKER_REGISTRY}
+                            echo $PASSWORD | docker login -u $USERNAME --password-stdin 
                         '''
                     }
                     // 推送 Docker 镜像到注册表
