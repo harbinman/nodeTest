@@ -28,7 +28,7 @@ pipeline {
                 script {
                     // 登录 Docker 注册表
                     withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                        sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin ${DOCKER_REGISTRY}"
+                        sh "docker login -u $USERNAME -p $PASSWORD"
                     }
                     // 推送 Docker 镜像到注册表
                     sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}"
