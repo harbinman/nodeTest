@@ -20,3 +20,16 @@ spec:
         image: harbinman/nodetest:7
         ports:
         - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodetest-service
+spec:
+  selector:
+    labels:
+    app: nodetest
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
