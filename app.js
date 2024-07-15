@@ -5,7 +5,7 @@ const port = 3000;
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-
+// route
 app.listen(port, () => {
   setInterval(() => {
     console.log(`Example app listening on port ${port}`);
