@@ -26,10 +26,10 @@ pipeline {
         stage('Push') {
             steps {
                 script {
-                    // 登录 Docker 注册表
-                    withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                        sh "docker login -u $USERNAME -p $PASSWORD"
-                    }
+                    // // 登录 Docker 注册表
+                    // withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                    //     sh "docker login -u $USERNAME -p $PASSWORD"
+                    // }
                     // 推送 Docker 镜像到注册表
                     sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}"
                     sh "docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}"
