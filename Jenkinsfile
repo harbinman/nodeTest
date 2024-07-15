@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_CREDENTIALS_ID = '0f18e7d0-2585-48af-843b-91a1fd3c7fde'  // Jenkins 中的 Docker 凭据 ID
+        DOCKER_CREDENTIALS_ID = 'bddfc23d-c18c-4ebf-89a9-4afa39dff7ef'  // Jenkins 中的 Docker 凭据 ID
         DOCKER_IMAGE = 'nodetest'
         DOCKER_TAG = "${env.BUILD_ID}"
         DOCKER_REGISTRY = 'harbinman'
