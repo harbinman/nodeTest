@@ -4,7 +4,7 @@ pipeline {
 
         registry = "harbinman/nodetest" 
 
-        registryCredential = 'dockerhub' 
+        docker_id = credentials("dockerhub")
 
         dockerImage = ''
     }
@@ -17,7 +17,7 @@ pipeline {
 
             steps { 
 
-               sh "echo  second  job"
+               checkout scm
             }
         } 
 
@@ -25,24 +25,15 @@ pipeline {
 
             steps { 
 
-                script { 
-
-                    dockerImage = docker.build registry + ":$build_num"
-                }
+               sh "docker.build . -t registry + ":$env.BUILD_NUMBER""
             }
         }
 
         stage('Deploy our image') { 
 
             steps { 
-
-                script { 
-
-                    docker.withRegistry( '', registryCredential ) { 
-
-                        dockerImage.push()
-                    }
-                }
+                sh "docker login -u ${docker_id_USR} -p ${docker_id_PWD}"
+                sh "docker image push registry:${env.BUILD_NUMBER}  registry:${env.BUILD_NUMBER}"
             }
         } 
 
