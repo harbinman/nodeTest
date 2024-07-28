@@ -25,7 +25,7 @@ pipeline {
 
             steps { 
 
-               sh "docker build  -t registry:${env.BUILD_NUMBER} ."
+               sh "docker build  -t ${registry}:${env.BUILD_NUMBER} ."
             }
         }
 
@@ -33,7 +33,7 @@ pipeline {
 
             steps { 
                 sh "docker login -u ${docker_id_USR} -p ${docker_id_PWD}"
-                sh "docker image push registry:${env.BUILD_NUMBER}  registry:${env.BUILD_NUMBER}"
+                sh "docker image push ${registry}:${env.BUILD_NUMBER}  ${registry}:${env.BUILD_NUMBER}"
             }
         } 
 
@@ -41,7 +41,7 @@ pipeline {
 
             steps { 
 
-                sh "docker rmi $registry:$build_num"
+                sh "docker rmi ${registry}:${env.BUILD_NUMBER}"
             }
         }
     }
