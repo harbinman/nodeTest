@@ -25,7 +25,7 @@ pipeline {
 
             steps { 
 
-               sh "docker.build . -t registry + ":$env.BUILD_NUMBER""
+               sh "docker build . -t registry + ":$env.BUILD_NUMBER""
             }
         }
 
