@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy our image') { 
 
             steps { 
-                sh "echo ${docker_id_PSW} | docker login --username docker_id.USR --password-stdin"
+                sh 'echo "${docker_id_PSW}" | docker login --username "${docker_id.USR}" --password-stdin'
                 sh "docker image push ${registry}:${env.BUILD_NUMBER}  ${registry}:${env.BUILD_NUMBER}"
             }
         } 
