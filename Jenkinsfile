@@ -1,10 +1,6 @@
 pipeline {
     agent any
-    environment {
 
-                scannerHome = tool 'SonarQube-Scanner'
-
-    }
     tools {
         nodejs 'NodeJS' // 使用你在全局工具配置中设置的名称
         
