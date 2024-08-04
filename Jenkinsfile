@@ -22,7 +22,7 @@ pipeline {
         }
         stage('sonar scan') {
             steps {
-               withSonarQubeEnv('sonarqube-server') {
+               withSonarQubeEnv('sonarqube-9.9.6') {
                     sh '''
                         ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=nodeproject \
