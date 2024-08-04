@@ -1,9 +1,13 @@
 pipeline {
     agent any
+    environment {
 
+                scannerHome = tool 'sonar_scanner'
+
+    }
     tools {
         nodejs 'NodeJS' // 使用你在全局工具配置中设置的名称
-        sonarScanner 'SonarQube-Scanner' // 使用你在全局工具配置中设置的名称
+        
     }
     stages {
         stage('git clone code') {
@@ -18,14 +22,14 @@ pipeline {
         }
         stage('sonar scan') {
             steps {
-                 withSonarQubeEnv('sonarqube-server') { // 'My SonarQube Server' 是在 Jenkins 中配置的 SonarQube 服务器名称
-                    sh """
-                        sonar-scanner \
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=nodeproject \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://jenkins.winters-tek.net:9001 \
                             -Dsonar.login=sqp_e17057f59f51fcf86db851c8aff12b8e0bcd3096
-                    """
+                    '''
                 }
             }
         }
