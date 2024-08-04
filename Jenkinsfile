@@ -1,6 +1,10 @@
 pipeline {
     agent any
+    environment {
 
+                scannerHome = tool 'SonarQubeScanner'
+
+     }
     tools {
         nodejs 'NodeJS' // 使用你在全局工具配置中设置的名称
         
@@ -20,7 +24,7 @@ pipeline {
             steps {
  
                     sh '''
-                        /root/sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner \
+                        ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=nodeproject \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://jenkins.winters-tek.net:9001 \
