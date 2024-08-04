@@ -3,6 +3,7 @@ pipeline {
 
     tools {
         nodejs 'NodeJS' // 使用你在全局工具配置中设置的名称
+        sonarScanner 'SonarQube-Scanner' // 使用你在全局工具配置中设置的名称
     }
     stages {
         stage('git clone code') {
