@@ -18,13 +18,15 @@ pipeline {
         }
         stage('sonar scan') {
             steps {
-                          sh """
+                 withSonarQubeEnv('sonarqube-server') { // 'My SonarQube Server' 是在 Jenkins 中配置的 SonarQube 服务器名称
+                    sh """
                         sonar-scanner \
                             -Dsonar.projectKey=nodeproject \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://jenkins.winters-tek.net:9001 \
                             -Dsonar.login=sqp_e17057f59f51fcf86db851c8aff12b8e0bcd3096
                     """
+                }
             }
         }
     }
