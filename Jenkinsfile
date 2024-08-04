@@ -22,7 +22,7 @@ pipeline {
         }
         stage('sonar scan') {
             steps {
-               
+               withSonarQubeEnv('sonarqube-server') {
                     sh '''
                         ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=nodeproject \
@@ -30,7 +30,7 @@ pipeline {
                             -Dsonar.host.url=http://jenkins.winters-tek.net:9001 \
                             -Dsonar.login=sqp_e17057f59f51fcf86db851c8aff12b8e0bcd3096
                     '''
-                
+               }
             }
         }
     }
