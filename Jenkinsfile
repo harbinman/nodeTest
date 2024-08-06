@@ -22,15 +22,18 @@ pipeline {
         }
         stage('sonar scan') {
             steps {
-
-                
-                    sh '''
+                    withCredentials([usernamePassword(credentialsId: '<credentials-id>', passwordVariable: 'password', usernameVariable: 'username')]) {
+                      sh '''
+                            docker login -u $username -p $password ...
                             /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey=nodeproject \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://jenkins.winters-tek.net:9001 \
                             -Dsonar.login=sqp_e17057f59f51fcf86db851c8aff12b8e0bcd3096
                     '''
+                    }
+                
+                  
                
             }
         }
