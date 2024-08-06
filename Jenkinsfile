@@ -24,7 +24,7 @@ pipeline {
             steps {
                     withCredentials([usernamePassword(credentialsId: 'nexus-user', passwordVariable: 'password', usernameVariable: 'username')]) {
                       sh '''
-                            docker login -u $username -p $password ...
+                            echo '${password}' | docker login -u ${username} --password-stdin 
                             /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey=nodeproject \
                             -Dsonar.sources=. \
