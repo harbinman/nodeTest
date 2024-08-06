@@ -22,9 +22,8 @@ pipeline {
         }
         stage('sonar scan') {
             steps {
-                    withCredentials([usernamePassword(credentialsId: 'nexus-user', passwordVariable: 'password', usernameVariable: 'username')]) {
+                   
                       sh '''
-                            echo '${password}' | docker login -u ${username} --password-stdin 
                             /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey=nodeproject \
                             -Dsonar.sources=. \
@@ -40,8 +39,9 @@ pipeline {
          stage('upload docker registry') {
             steps {
 
-                
+                 withCredentials([usernamePassword(credentialsId: 'nexus-user', passwordVariable: 'password', usernameVariable: 'username')]) {
                     sh '''
+                        echo '${password}' | docker login -u ${username} --password-stdin 
                         docker build  -t nodetest .
                         docker tag nodetest nexus.winters-tek.net:8083/nodetest:latest 
                         docker push nexus.winters-tek.net:8083/nodetest:latest
