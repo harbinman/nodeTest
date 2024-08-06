@@ -34,5 +34,17 @@ pipeline {
                
             }
         }
+         stage('upload docker registry') {
+            steps {
+
+                
+                    sh '''
+                        docker build  -t nodetest .
+                        docker tag nexus.winters-tek.net:8083/nodetest:latest nodetest
+                        docker push nexus.winters-tek.net:8083/nodetest:latest
+                    '''
+               
+            }
+        }
     }
 }
