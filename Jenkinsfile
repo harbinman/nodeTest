@@ -42,7 +42,7 @@ pipeline {
 
                withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                      sh '''
-                        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY'
+                        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
                         docker build  -t nodetest .
                         docker tag nodetest nexus.winters-tek.net:8083/nodetest:latest 
                         docker push nexus.winters-tek.net:8083/nodetest:latest
