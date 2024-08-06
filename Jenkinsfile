@@ -47,7 +47,7 @@ pipeline {
                         docker tag nodetest nexus.winters-tek.net:8083/nodetest:latest 
                         docker push nexus.winters-tek.net:8083/nodetest:latest
                     '''
-               
+               }
             }
         }
     }
