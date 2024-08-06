@@ -22,7 +22,7 @@ pipeline {
         }
         stage('sonar scan') {
             steps {
-                    withCredentials([usernamePassword(credentialsId: '<credentials-id>', passwordVariable: 'password', usernameVariable: 'username')]) {
+                    withCredentials([usernamePassword(credentialsId: 'nexus-user', passwordVariable: 'password', usernameVariable: 'username')]) {
                       sh '''
                             docker login -u $username -p $password ...
                             /opt/sonar-scanner/bin/sonar-scanner \
