@@ -22,7 +22,8 @@ pipeline {
         }
         stage('sonar scan') {
             steps {
- 
+
+                
                     sh '''
                             /opt/sonar-scanner \
                             -Dsonar.projectKey=nodeproject \
