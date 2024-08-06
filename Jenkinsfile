@@ -3,7 +3,8 @@ pipeline {
     environment {
 
                 scannerHome = tool 'SonarQubeScanner'
-
+                DOCKER_REGISTRY = 'http://nexus.winters-tek.net:8083/'
+                DOCKER_CREDENTIALS_ID = 'nexus-user' // 在 Jenkins 中配置的 Docker 凭证的 ID
      }
     tools {
         nodejs 'NodeJS' // 使用你在全局工具配置中设置的名称
@@ -39,9 +40,9 @@ pipeline {
          stage('upload docker registry') {
             steps {
 
-                 withCredentials([usernamePassword(credentialsId: 'nexus-user', passwordVariable: 'password', usernameVariable: 'username')]) {
-                    sh '''
-                        echo '${password}' | docker login -u ${username} --password-stdin 
+               withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                     sh '''
+                        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY'
                         docker build  -t nodetest .
                         docker tag nodetest nexus.winters-tek.net:8083/nodetest:latest 
                         docker push nexus.winters-tek.net:8083/nodetest:latest
