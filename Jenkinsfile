@@ -24,7 +24,7 @@ pipeline {
             steps {
  
                     sh '''
-                        ${scannerHome}/bin/sonar-scanner \
+                            /opt/sonar-scanner \
                             -Dsonar.projectKey=nodeproject \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://jenkins.winters-tek.net:9001 \
