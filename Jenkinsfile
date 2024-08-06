@@ -44,8 +44,8 @@ pipeline {
                      sh '''
                         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
                         docker build  -t nodetest .
-                        docker tag nodetest nexus.winters-tek.net:8083/nodetest:"${env.BUILD_NUMBER}"
-                        docker push nexus.winters-tek.net:8083/nodetest:"${env.BUILD_NUMBER}" 
+                        docker tag nodetest nexus.winters-tek.net:8083/nodetest:${env.BUILD_NUMBER}
+                        docker push nexus.winters-tek.net:8083/nodetest:${env.BUILD_NUMBER}
                         '''
                    }
                 }
