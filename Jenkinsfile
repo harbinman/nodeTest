@@ -39,8 +39,8 @@ pipeline {
         
          stage('upload docker registry') {
             steps {
-
-               withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                 script {
+                   withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                      sh '''
                         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
                         docker build  -t nodetest .
@@ -48,6 +48,7 @@ pipeline {
                         docker push nexus.winters-tek.net:8083/nodetest:"${env.BUILD_NUMBER}"
                         '''
                    }
+                 }
                 }
             }
         }
